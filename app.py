@@ -1,11 +1,9 @@
-# This is just a comment
-# this is another comment
-# this is yet another
+# print("my name is ifeoluwa")
+# print("ifeoluwa is learning python")
+# print("ifeoluwa wants to become a python expert")
 
-
-trousers_quantity = 3 #number of trousers bought
-print(trousers_quantity,"trouser")
-trousers_cost = 750 # cost of one 
-print("each trouser costs",trousers_cost)
-total_cost = trousers_cost * trousers_quantity # total amount paid for trousers
-print("total cost of trousers",total_cost)
+name ="ifeoluwa"
+language = "c#"
+print("my name is",name)
+print(name,"is learning",language)
+print(name,"wants to become a",language,"expert")
