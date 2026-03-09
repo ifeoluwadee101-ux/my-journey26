@@ -1,27 +1,4 @@
-<<<<<<< HEAD
-#print("customer profile")
-#print("my name is mitchell")
-#print("my surname is king")
-#print("my gender is female")
-#print("i am 25 years old")
-#print("i am from kogi state")
-#print("i am a doctor")
 
-("customer profile:")
-name = input(" name: ")
-surname = input("surname: ")
-gender = input("sex: ")
-age = input("age: ")
-state = input("state of origin: ")
-occupation = input("occupation: ")
-print("customer profile")
-print("my name is",name)
-print("my surname is",surname)
-print("my gender is",gender)
-print("i am",age,"years old")
-print("i am from",state,"state")
-print("i am a",occupation)
-=======
 #create a kyc app that collect info from users
 #info includes :name,surname,age,gender,state of origin,occupation,tribe
 
@@ -47,4 +24,3 @@ print(f""" customer profile:\n\t
             ->occupation: {occupation}\t
             ->tribe:{tribe}\t
       """)
->>>>>>> staging
