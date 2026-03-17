@@ -17,15 +17,8 @@
 # print("\tstate of origin -",state)
 # print("\toccupation -",occupation)
 # print("\ttribe -",tribe)
-<<<<<<< HEAD
-print(f""" customer profile:\n\t
-            ->full name: {name} {surname}\t
-            ->age: {age}\t
-            ->gender: {gender}\t
-            ->occupation: {occupation}\t
-            ->tribe:{tribe}\t
-      """)
-=======
+
+    
 # print(f""" customer profile:\n\t
 #             ->full name: {name} {surname}\t
 #             ->age: {age}\t
@@ -57,4 +50,4 @@ print(f"tribe : {tribe}")
 
 
      
->>>>>>> development
+
