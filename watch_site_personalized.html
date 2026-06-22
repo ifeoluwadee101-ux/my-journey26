@@ -1,0 +1,584 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  .w-site {
+    background: #0F0F15;
+    color: #E0E0E0;
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+  }
+
+  .w-nav {
+    background: #0F0F15;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    border-bottom: 0.5px solid rgba(255,255,255,0.08);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  .w-logo {
+    font-size: 24px;
+    font-weight: 600;
+    color: #FFFFFF;
+    letter-spacing: -1px;
+  }
+
+  .w-search-box {
+    position: relative;
+    flex: 1;
+    max-width: 240px;
+    margin: 0 1.5rem;
+  }
+
+  .w-search {
+    width: 100%;
+    background: rgba(255,255,255,0.06);
+    border: 0.5px solid rgba(255,255,255,0.12);
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 13px;
+    color: #E0E0E0;
+    outline: none;
+  }
+
+  .w-search::placeholder { color: rgba(224,224,224,0.4); }
+
+  .w-nav-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .w-profile-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #6B63A0;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFFFFF;
+    font-size: 16px;
+  }
+
+  .w-main {
+    padding: 1.5rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .w-section {
+    margin-bottom: 2.5rem;
+  }
+
+  .w-section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+
+  .w-section-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #FFFFFF;
+  }
+
+  .w-see-all {
+    font-size: 12px;
+    color: #A998D6;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .w-see-all:hover { color: #C9BFE8; }
+
+  .w-continue-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+
+  .w-continue-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .w-continue-poster {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: linear-gradient(135deg, #1A1A3E 0%, #2D1B4E 100%);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    color: rgba(255,255,255,0.15);
+  }
+
+  .w-continue-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .w-continue-card:hover .w-continue-overlay { opacity: 1; }
+
+  .w-play-icon {
+    width: 48px;
+    height: 48px;
+    background: #A998D6;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #0F0F15;
+    font-size: 20px;
+  }
+
+  .w-progress-bar {
+    height: 3px;
+    background: rgba(255,255,255,0.15);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  }
+
+  .w-progress-fill {
+    height: 100%;
+    background: #A998D6;
+  }
+
+  .w-continue-meta {
+    padding: 8px 0;
+    font-size: 12px;
+    color: rgba(224,224,224,0.6);
+  }
+
+  .w-continue-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: #E0E0E0;
+  }
+
+  .w-rec-row {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 12px;
+  }
+
+  .w-card {
+    cursor: pointer;
+    position: relative;
+  }
+
+  .w-card-poster {
+    width: 100%;
+    aspect-ratio: 2/3;
+    border-radius: 4px;
+    background: linear-gradient(135deg, #1A1A2E 0%, #2A1530 100%);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    color: rgba(255,255,255,0.1);
+    transition: transform 0.2s;
+  }
+
+  .w-card:hover .w-card-poster { transform: scale(1.04); }
+
+  .w-card-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    display: flex;
+    align-items: flex-end;
+    padding: 12px;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .w-card:hover .w-card-overlay { opacity: 1; }
+
+  .w-card-actions {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .w-card-play {
+    flex: 1;
+    background: #A998D6;
+    border: none;
+    border-radius: 3px;
+    padding: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #0F0F15;
+    font-size: 14px;
+    transition: opacity 0.2s;
+  }
+
+  .w-card-play:hover { opacity: 0.9; }
+
+  .w-card-list {
+    background: rgba(255,255,255,0.12);
+    border: 0.5px solid rgba(255,255,255,0.18);
+    width: 32px;
+    border-radius: 3px;
+    cursor: pointer;
+    color: #E0E0E0;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+  }
+
+  .w-card-list:hover { background: rgba(169,152,214,0.2); }
+  .w-card-list.added { background: #A998D6; color: #0F0F15; }
+
+  .w-card-title {
+    font-size: 12px;
+    font-weight: 500;
+    color: #E0E0E0;
+    margin-top: 6px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .w-card-meta {
+    font-size: 11px;
+    color: rgba(224,224,224,0.5);
+    margin-top: 2px;
+  }
+
+  .w-rating {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 11px;
+    color: rgba(224,224,224,0.6);
+  }
+
+  .w-star {
+    color: #A998D6;
+    font-size: 10px;
+  }
+</style>
+
+<div class="w-site">
+  <h1 class="sr-only">watch — streaming service homepage</h1>
+
+  <nav class="w-nav">
+    <div class="w-logo">watch</div>
+    <div class="w-search-box">
+      <input class="w-search" type="text" placeholder="Find something to watch..." />
+    </div>
+    <div class="w-nav-right">
+      <button class="w-profile-btn" aria-label="Profile menu"><i class="ti ti-user" aria-hidden="true"></i></button>
+    </div>
+  </nav>
+
+  <div class="w-main">
+    <div class="w-section">
+      <div class="w-section-header">
+        <h2 class="w-section-title">Continue watching</h2>
+        <a class="w-see-all">See all →</a>
+      </div>
+      <div class="w-continue-row">
+        <div class="w-continue-card">
+          <div class="w-continue-poster">🎬</div>
+          <div class="w-continue-overlay">
+            <div class="w-play-icon"><i class="ti ti-player-play" aria-hidden="true"></i></div>
+          </div>
+          <div class="w-progress-bar">
+            <div class="w-progress-fill" style="width: 65%;"></div>
+          </div>
+          <div class="w-continue-meta">Season 2, Ep 7 • 38m left</div>
+          <div class="w-continue-title">Midnight Protocol</div>
+        </div>
+        <div class="w-continue-card">
+          <div class="w-continue-poster">🌙</div>
+          <div class="w-continue-overlay">
+            <div class="w-play-icon"><i class="ti ti-player-play" aria-hidden="true"></i></div>
+          </div>
+          <div class="w-progress-bar">
+            <div class="w-progress-fill" style="width: 42%;"></div>
+          </div>
+          <div class="w-continue-meta">1h 15m left</div>
+          <div class="w-continue-title">The Pale Theorem</div>
+        </div>
+        <div class="w-continue-card">
+          <div class="w-continue-poster">🏔️</div>
+          <div class="w-continue-overlay">
+            <div class="w-play-icon"><i class="ti ti-player-play" aria-hidden="true"></i></div>
+          </div>
+          <div class="w-progress-bar">
+            <div class="w-progress-fill" style="width: 28%;"></div>
+          </div>
+          <div class="w-continue-meta">2h 30m left</div>
+          <div class="w-continue-title">Hollow Earth</div>
+        </div>
+        <div class="w-continue-card">
+          <div class="w-continue-poster">✨</div>
+          <div class="w-continue-overlay">
+            <div class="w-play-icon"><i class="ti ti-player-play" aria-hidden="true"></i></div>
+          </div>
+          <div class="w-progress-bar">
+            <div class="w-progress-fill" style="width: 12%;"></div>
+          </div>
+          <div class="w-continue-meta">3h 5m left</div>
+          <div class="w-continue-title">Neon Requiem</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="w-section">
+      <div class="w-section-header">
+        <h2 class="w-section-title">Recommended for you</h2>
+        <a class="w-see-all">See all →</a>
+      </div>
+      <div class="w-rec-row">
+        <div class="w-card">
+          <div class="w-card-poster">🎭</div>
+          <div class="w-card-overlay">
+            <div class="w-card-actions">
+              <button class="w-card-play" title="Play"><i class="ti ti-player-play" aria-hidden="true"></i></button>
+              <button class="w-card-list" title="Add to list" onclick="this.classList.toggle('added')"><i class="ti ti-plus" aria-hidden="true"></i></button>
+            </div>
+          </div>
+          <div class="w-card-title">Ghost Meridian</div>
+          <div class="w-card-meta"><span class="w-rating"><span class="w-star">★</span> 7.6</span> • Sci-Fi</div>
+        </div>
+        <div class="w-card">
+          <div class="w-card-poster">🔮</div>
+          <div class="w-card-overlay">
+            <div class="w-card-actions">
+              <button class="w-card-play" title="Play"><i class="ti ti-player-play" aria-hidden="true"></i></button>
+              <button class="w-card-list" title="Add to list" onclick="this.classList.toggle('added')"><i class="ti ti-plus" aria-hidden="true"></i></button>
+            </div>
+          </div>
+          <div class="w-card-title">Vespers</div>
+          <div class="w-card-meta"><span class="w-rating"><span class="w-star">★</span> 9.0</span> • Mystery</div>
+        </div>
+        <div class="w-card">
+          <div class="w-card-poster">🏴</div>
+          <div class="w-card-overlay">
+            <div class="w-card-actions">
+              <button class="w-card-play" title="Play"><i class="ti ti-player-play" aria-hidden="true"></i></button>
+              <button class="w-card-list" title="Add to list" onclick="this.classList.toggle('added')"><i class="ti ti-plus" aria-hidden="true"></i></button>
+            </div>
+          </div>
+          <div class="w-card-title">Iron Covenant</div>
+          <div class="w-card-meta"><span class="w-rating"><span class="w-star">★</span> 7.8</span> • Fantasy</div>
+        </div>
+        <div class="w-card">
+          <div class="w-card-poster">🌊</div>
+          <div class="w-card-overlay">
+            <div class="w-card-actions">
+              <button class="w-card-play" title="Play"><i class="ti ti-player-play" aria-hidden="true"></i></button>
+              <button class="w-card-list" title="Add to list" onclick="this.classList.toggle('added')"><i class="ti ti-plus" aria-hidden="true"></i></button>
+            </div>
+          </div>
+          <div class="w-card-title">Lantern Fish</div>
+          <div class="w-card-meta"><span class="w-rating"><span class="w-star">★</span> 9.1</span> • Sci-Fi</div>
+        </div>
+        <div class="w-card">
+          <div class="w-card-poster">⚡</div>
+          <div class="w-card-overlay">
+            <div class="w-card-actions">
+              <button class="w-card-play" title="Play"><i class="ti ti-player-play" aria-hidden="true"></i></button>
+              <button class="w-card-list" title="Add to list" onclick="this.classList.toggle('added')"><i class="ti ti-plus" aria-hidden="true"></i></button>
+            </div>
+          </div>
+          <div class="w-card-title">The Architect</div>
+          <div class="w-card-meta"><span class="w-rating"><span class="w-star">★</span> 9.0</span> • Crime</div>
+        </div>
+        <div class="w-card">
+          <div class="w-card-poster">🎪</div>
+          <div class="w-card-overlay">
+            <div class="w-card-actions">
+              <button class="w-card-play" title="Play"><i class="ti ti-player-play" aria-hidden="true"></i></button>
+              <button class="w-card-list" title="Add to list" onclick="this.classList.toggle('added')"><i class="ti ti-plus" aria-hidden="true"></i></button>
+            </div>
+          </div>
+          <div class="w-card-title">A Brief Eternity</div>
+          <div class="w-card-meta"><span class="w-rating"><span class="w-star">★</span> 9.2</span> • Drama</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="w-section">
+      <div class="w-section-header">
+        <h2 class="w-section-title">Trending now</h2>
+        <a class="w-see-all">See all →</a>
+      </div>
+      <div class="w-rec-row">
+        <div class="w-card">
+          <div class="w-card-poster">🌀</div>
+          <div class="w-card-overlay">
+            <div class="w-card-actions">
+              <button class="w-card-play" title="Play"><i class="ti ti-player-play" aria-hidden="true"></i></button>
+              <button class="w-card-list" title="Add to list" onclick="this.classList.toggle('added')"><i class="ti ti-plus" aria-hidden="true"></i></button>
+            </div>
+          </div>
+          <div class="w-card-title">Hollow Earth</div>
+          <div class="w-card-meta"><span class="w-rating"><span class="w-star">★</span> 7.9</span> • Action</div>
+        </div>
+        <div class="w-card">
+          <div class="w-card-poster">🔥</div>
+          <div class="w-card-overlay">
+            <div class="w-card-actions">
+              <button class="w-card-play" title="Play"><i class="ti ti-player-play" aria-hidden="true"></i></button>
+              <button class="w-card-list" title="Add to list" onclick="this.classList.toggle('added')"><i class="ti ti-plus" aria-hidden="true"></i></button>
+            </div>
+          </div>
+          <div class="w-card-title">Carnivore Season</div>
+          <div class="w-card-meta"><span class="w-rating"><span class="w-star">★</span> 7.1</span> • Horror</div>
+        </div>
+        <div class="w-card">
+          <div class="w-card-poster">🌸</div>
+          <div class="w-card-overlay">
+            <div class="w-card-actions">
+              <button class="w-card-play" title="Play"><i class="ti ti-player-play" aria-hidden="true"></i></button>
+              <button class="w-card-list" title="Add to list" onclick="this.classList.toggle('added')"><i class="ti ti-plus" aria-hidden="true"></i></button>
+            </div>
+          </div>
+          <div class="w-card-title">Last Apricot</div>
+          <div class="w-card-meta"><span class="w-rating"><span class="w-star">★</span> 7.3</span> • Romance</div>
+        </div>
+        <div class="w-card">
+          <div class="w-card-poster">🎯</div>
+          <div class="w-card-overlay">
+            <div class="w-card-actions">
+              <button class="w-card-play" title="Play"><i class="ti ti-player-play" aria-hidden="true"></i></button>
+              <button class="w-card-list" title="Add to list" onclick="this.classList.toggle('added')"><i class="ti ti-plus" aria-hidden="true"></i></button>
+            </div>
+          </div>
+          <div class="w-card-title">Mirrors of Oslo</div>
+          <div class="w-card-meta"><span class="w-rating"><span class="w-star">★</span> 7.5</span> • Drama</div>
+        </div>
+        <div class="w-card">
+          <div class="w-card-poster">🎨</div>
+          <div class="w-card-overlay">
+            <div class="w-card-actions">
+              <button class="w-card-play" title="Play"><i class="ti ti-player-play" aria-hidden="true"></i></button>
+              <button class="w-card-list" title="Add to list" onclick="this.classList.toggle('added')"><i class="ti ti-plus" aria-hidden="true"></i></button>
+            </div>
+          </div>
+          <div class="w-card-title">Dusk Cartography</div>
+          <div class="w-card-meta"><span class="w-rating"><span class="w-star">★</span> 8.5</span> • Drama</div>
+        </div>
+        <div class="w-card">
+          <div class="w-card-poster">🌙</div>
+          <div class="w-card-overlay">
+            <div class="w-card-actions">
+              <button class="w-card-play" title="Play"><i class="ti ti-player-play" aria-hidden="true"></i></button>
+              <button class="w-card-list" title="Add to list" onclick="this.classList.toggle('added')"><i class="ti ti-plus" aria-hidden="true"></i></button>
+            </div>
+          </div>
+          <div class="w-card-title">The Pale Theorem</div>
+          <div class="w-card-meta"><span class="w-rating"><span class="w-star">★</span> 8.2</span> • Mystery</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="w-section">
+      <div class="w-section-header">
+        <h2 class="w-section-title">Popular in Sci-Fi</h2>
+        <a class="w-see-all">See all →</a>
+      </div>
+      <div class="w-rec-row">
+        <div class="w-card">
+          <div class="w-card-poster">🚀</div>
+          <div class="w-card-overlay">
+            <div class="w-card-actions">
+              <button class="w-card-play" title="Play"><i class="ti ti-player-play" aria-hidden="true"></i></button>
+              <button class="w-card-list" title="Add to list" onclick="this.classList.toggle('added')"><i class="ti ti-plus" aria-hidden="true"></i></button>
+            </div>
+          </div>
+          <div class="w-card-title">The Weight of Blue</div>
+          <div class="w-card-meta"><span class="w-rating"><span class="w-star">★</span> 8.8</span> • Thriller</div>
+        </div>
+        <div class="w-card">
+          <div class="w-card-poster">🌌</div>
+          <div class="w-card-overlay">
+            <div class="w-card-actions">
+              <button class="w-card-play" title="Play"><i class="ti ti-player-play" aria-hidden="true"></i></button>
+              <button class="w-card-list" title="Add to list" onclick="this.classList.toggle('added')"><i class="ti ti-plus" aria-hidden="true"></i></button>
+            </div>
+          </div>
+          <div class="w-card-title">Parallax Dream</div>
+          <div class="w-card-meta"><span class="w-rating"><span class="w-star">★</span> 8.7</span> • Sci-Fi</div>
+        </div>
+        <div class="w-card">
+          <div class="w-card-poster">⭐</div>
+          <div class="w-card-overlay">
+            <div class="w-card-actions">
+              <button class="w-card-play" title="Play"><i class="ti ti-player-play" aria-hidden="true"></i></button>
+              <button class="w-card-list" title="Add to list" onclick="this.classList.toggle('added')"><i class="ti ti-plus" aria-hidden="true"></i></button>
+            </div>
+          </div>
+          <div class="w-card-title">Sable & Ivory</div>
+          <div class="w-card-meta"><span class="w-rating"><span class="w-star">★</span> 8.9</span> • Mystery</div>
+        </div>
+        <div class="w-card">
+          <div class="w-card-poster">🎭</div>
+          <div class="w-card-overlay">
+            <div class="w-card-actions">
+              <button class="w-card-play" title="Play"><i class="ti ti-player-play" aria-hidden="true"></i></button>
+              <button class="w-card-list" title="Add to list" onclick="this.classList.toggle('added')"><i class="ti ti-plus" aria-hidden="true"></i></button>
+            </div>
+          </div>
+          <div class="w-card-title">The Copper Line</div>
+          <div class="w-card-meta"><span class="w-rating"><span class="w-star">★</span> 8.0</span> • Crime</div>
+        </div>
+        <div class="w-card">
+          <div class="w-card-poster">🏰</div>
+          <div class="w-card-overlay">
+            <div class="w-card-actions">
+              <button class="w-card-play" title="Play"><i class="ti ti-player-play" aria-hidden="true"></i></button>
+              <button class="w-card-list" title="Add to list" onclick="this.classList.toggle('added')"><i class="ti ti-plus" aria-hidden="true"></i></button>
+            </div>
+          </div>
+          <div class="w-card-title">Children of Ash</div>
+          <div class="w-card-meta"><span class="w-rating"><span class="w-star">★</span> 8.8</span> • Thriller</div>
+        </div>
+        <div class="w-card">
+          <div class="w-card-poster">🔬</div>
+          <div class="w-card-overlay">
+            <div class="w-card-actions">
+              <button class="w-card-play" title="Play"><i class="ti ti-player-play" aria-hidden="true"></i></button>
+              <button class="w-card-list" title="Add to list" onclick="this.classList.toggle('added')"><i class="ti ti-plus" aria-hidden="true"></i></button>
+            </div>
+          </div>
+          <div class="w-card-title">Salt & Marrow</div>
+          <div class="w-card-meta"><span class="w-rating"><span class="w-star">★</span> 8.9</span> • Thriller</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
